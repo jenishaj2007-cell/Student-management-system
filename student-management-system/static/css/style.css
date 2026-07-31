@@ -1,0 +1,17 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #eef6ff 0%, #dbeafe 100%);
+  color: #0f172a;
+}
+.wrapper { display: flex; min-height: 100vh; }
+.sidebar { width: 260px; background: #0f4c81; color: #fff; padding: 24px 16px; }
+.brand { font-size: 1.3rem; margin-bottom: 2rem; }
+.sidebar a { display: block; color: #fff; text-decoration: none; padding: 10px 12px; border-radius: 8px; margin-bottom: 8px; }
+.sidebar a:hover { background: rgba(255,255,255,0.16); }
+.content { flex: 1; padding: 24px; }
+.card { border: 0; border-radius: 16px; box-shadow: 0 12px 30px rgba(15, 76, 129, 0.12); }
+.stat-card { background: linear-gradient(135deg, #1d4ed8, #2563eb); color: white; }
+.login-card { max-width: 420px; margin: 80px auto; background: white; padding: 32px; border-radius: 18px; box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+.table-responsive { background: white; border-radius: 16px; padding: 12px; }
+.btn-primary { background: #2563eb; border-color: #2563eb; }
+.btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }

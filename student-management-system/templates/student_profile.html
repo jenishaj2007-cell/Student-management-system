@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mb-4"><h2 class="fw-bold">My Profile</h2><p class="text-muted">Update profile details and upload a new photo.</p></div>
+<form class="card p-4" method="post" enctype="multipart/form-data">
+  <div class="row g-3">
+    <div class="col-md-6"><label class="form-label">Full Name</label><input class="form-control" name="full_name" value="{{ student.full_name }}" /></div>
+    <div class="col-md-6"><label class="form-label">Register Number</label><input class="form-control" value="{{ student.register_number }}" disabled /></div>
+    <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" name="email" value="{{ student.email }}" /></div>
+    <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" name="phone" value="{{ student.phone }}" /></div>
+    <div class="col-md-6"><label class="form-label">Course</label><input class="form-control" name="course" value="{{ student.course }}" /></div>
+    <div class="col-md-6"><label class="form-label">Profile Photo</label><input class="form-control" type="file" name="photo" /></div>
+    <div class="col-12"><button class="btn btn-primary">Update Profile</button></div>
+  </div>
+</form>
+{% endblock %}

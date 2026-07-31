@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h2 class="fw-bold">Attendance Management</h2><p class="text-muted">Mark daily attendance and review monthly summaries.</p></div>
+</div>
+<form class="card p-4 mb-4" method="post">
+  <div class="row g-3 align-items-end">
+    <div class="col-md-4"><label class="form-label">Attendance Date</label><input class="form-control" type="date" name="attendance_date" value="{{ selected_date }}" /></div>
+    <div class="col-md-4"><button class="btn btn-primary">Save Attendance</button></div>
+    <div class="col-md-4"><div class="text-end text-muted">Monthly attendance: {{ monthly_percentage }}%</div></div>
+  </div>
+  <div class="table-responsive mt-3">
+    <table class="table table-hover">
+      <thead><tr><th>Student</th><th>Status</th><th>Remarks</th></tr></thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.full_name }}</td>
+          <td>
+            <select class="form-select" name="status_{{ student.id }}">
+              <option value="Present" {% if attendance_rows.get(student.id, {}).get('status') == 'Present' %}selected{% endif %}>Present</option>
+              <option value="Absent" {% if attendance_rows.get(student.id, {}).get('status') == 'Absent' %}selected{% endif %}>Absent</option>
+              <option value="Late" {% if attendance_rows.get(student.id, {}).get('status') == 'Late' %}selected{% endif %}>Late</option>
+            </select>
+          </td>
+          <td><input class="form-control" name="remarks_{{ student.id }}" value="{{ attendance_rows.get(student.id, {}).get('remarks', '') }}" /></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</form>
+{% endblock %}

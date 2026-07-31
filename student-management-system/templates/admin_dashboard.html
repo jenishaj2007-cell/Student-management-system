@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="fw-bold">Admin Dashboard</h2>
+    <p class="text-muted">Overview of students, fees, attendance, and announcements.</p>
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+</div>
+<div class="row g-4 mb-4">
+  <div class="col-lg-3 col-md-6"><div class="card stat-card p-4"><h6>Total Students</h6><h2>{{ stats.students }}</h2></div></div>
+  <div class="col-lg-3 col-md-6"><div class="card stat-card p-4"><h6>Fees Collected</h6><h2>${{ stats.fees_collected }}</h2></div></div>
+  <div class="col-lg-3 col-md-6"><div class="card stat-card p-4"><h6>Pending Fees</h6><h2>${{ stats.pending_fees }}</h2></div></div>
+  <div class="col-lg-3 col-md-6"><div class="card stat-card p-4"><h6>Attendance</h6><h2>{{ stats.attendance }}%</h2></div></div>
+</div>
+<div class="row g-4">
+  <div class="col-xl-7">
+    <div class="card p-4">
+      <h5 class="fw-bold mb-3">Student Growth</h5>
+      <div class="d-flex align-items-end gap-2" style="height: 220px;">
+        {% for value in growth %}
+          <div class="bg-primary rounded-top" style="width: 42px; height: {{ value*10 }}px;"></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-5">
+    <div class="card p-4">
+      <h5 class="fw-bold mb-3">Recent Announcements</h5>
+      {% for announcement in announcements %}
+        <div class="border rounded p-3 mb-2">
+          <strong>{{ announcement.title }}</strong>
+          <div class="text-muted small">{{ announcement.message }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="card p-4 mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0">Student List</h5>
+    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('admin_students') }}">Manage Students</a>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead><tr><th>Register</th><th>Name</th><th>Course</th><th>Email</th></tr></thead>
+      <tbody>
+        {% for student in students %}
+        <tr><td>{{ student.register_number }}</td><td>{{ student.full_name }}</td><td>{{ student.course }}</td><td>{{ student.email }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

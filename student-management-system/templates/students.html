@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h2 class="fw-bold">Manage Students</h2><p class="text-muted">Add, edit, search, and remove students.</p></div>
+  <a class="btn btn-outline-primary" href="{{ url_for('admin_dashboard') }}">Back</a>
+</div>
+<form class="row g-3 card p-4 mb-4" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="student_id" value="{{ student_to_edit.id if student_to_edit else '' }}" />
+  <div class="col-md-6"><label class="form-label">Register Number</label><input class="form-control" name="register_number" value="{{ student_to_edit.register_number if student_to_edit else '' }}" required /></div>
+  <div class="col-md-6"><label class="form-label">Full Name</label><input class="form-control" name="full_name" value="{{ student_to_edit.full_name if student_to_edit else '' }}" required /></div>
+  <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" name="email" value="{{ student_to_edit.email if student_to_edit else '' }}" /></div>
+  <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" name="phone" value="{{ student_to_edit.phone if student_to_edit else '' }}" /></div>
+  <div class="col-md-6"><label class="form-label">Course</label><input class="form-control" name="course" value="{{ student_to_edit.course if student_to_edit else '' }}" /></div>
+  <div class="col-md-6"><label class="form-label">Password</label><input class="form-control" name="password" placeholder="Leave blank to keep current" /></div>
+  <div class="col-12"><label class="form-label">Profile Photo</label><input class="form-control" type="file" name="photo" /></div>
+  <div class="col-12"><button class="btn btn-primary">Save Student</button></div>
+</form>
+<form class="mb-3" method="get">
+  <div class="input-group">
+    <input class="form-control" name="q" placeholder="Search by name or register number" value="{{ search }}" />
+    <button class="btn btn-primary">Search</button>
+  </div>
+</form>
+<div class="card p-4">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead><tr><th>Register</th><th>Name</th><th>Course</th><th>Contact</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <td>{{ student.register_number }}</td>
+          <td>{{ student.full_name }}</td>
+          <td>{{ student.course }}</td>
+          <td>{{ student.email }}<br>{{ student.phone }}</td>
+          <td>
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('admin_students', edit=student.id) }}">Edit</a>
+            <a class="btn btn-sm btn-outline-danger" href="{{ url_for('delete_student', student_id=student.id) }}">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
