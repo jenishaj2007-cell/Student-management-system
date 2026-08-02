@@ -5,11 +5,12 @@ import uuid
 from datetime import datetime, timedelta
 from functools import wraps
 from pathlib import Path
+import tempfile
 
 from flask import Flask, g, redirect, render_template, request, send_file, session, url_for
 from werkzeug.utils import secure_filename
-
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR =Path(__file__).resolve().parent
+BASE_DIR =Path(__file__).resolve().parent
 UPLOAD_FOLDER = BASE_DIR / "static" / "uploads"
 UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True)
 
@@ -20,8 +21,8 @@ app.config["DATABASE_PATH"] = os.environ.get("DATABASE_PATH", str(BASE_DIR / "da
 
 
 def ensure_database_path() -> None:
-    db_path = Path(app.config["DATABASE_PATH"])
-    db_path.parent.mkdir(parents=True, exist_ok=True)
+    db_Path = Path(app.config["DATABASE_PATH"])
+    db_Path.parent.mkdir(parents=True, exist_ok=True)
 
 
 def hash_password(password: str) -> str:
